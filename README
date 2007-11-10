@@ -1,0 +1,29 @@
+= RDFbus
+
+== Dependencies
+
+* Ruby 1.8+
+* RDF.rb
+
+
+== Download
+
+The latest version of RDFbus can be found at:
+
+* http://rubyforge.org/frs/?group_id=4833
+
+API documentation can be found at:
+
+* http://rdfbus.rubyforge.org/
+
+
+== Installation
+
+The recommended installation method is via RubyGems:
+
+  % [sudo] gem install rdfbus
+
+
+== License
+
+RDFbus is released under the MIT license.
