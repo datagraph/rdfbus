@@ -6,20 +6,29 @@ module RDFbus::Transports
 
     def initialize(uri, options = {})
       super
-      @conn = RightAws::SqsGen2.new(ENV['AMAZON_ACCESS_KEY_ID'], ENV['AMAZON_SECRET_ACCESS_KEY'])
-      @queue = @conn.queue(Digest::SHA1.hexdigest(uri.to_s), true)
+
+      @sqs = RightAws::SqsGen2.new(ENV['AMAZON_ACCESS_KEY_ID'], ENV['AMAZON_SECRET_ACCESS_KEY'])
+      @queue = @sqs.queue(Digest::SHA1.hexdigest(uri.to_s), true)
+
+      @s3 = RightAws::S3.new(ENV['AMAZON_ACCESS_KEY_ID'], ENV['AMAZON_SECRET_ACCESS_KEY'])
+      @bucket = @s3.bucket('rdfbus')
     end
 
     def publish(payload)
-      @queue.send_message(payload.to_s)
+      payload = payload.to_s
+      key = Digest::SHA1.hexdigest(payload)
+      @bucket.put(key, payload)
+      @queue.send_message(key)
     end
 
     def subscribe(interval = 2, timeout = nil, &block)
       start = Time.now
       loop do
         if msg = @queue.receive
-          block.call(msg.body)
+          key = @bucket.key(msg.body)
+          block.call(key.data)
           msg.delete
+          key.delete
         end
         break if !timeout.nil? && (Time.now - start) >= timeout
         sleep interval
