@@ -2,7 +2,7 @@ require 'digest/sha1'
 require 'right_aws'
 
 module RDFbus::Transports
-  class AmazonSQS < RDFbus::Transport
+  class AWS < RDFbus::Transport
 
     def initialize(uri, options = {})
       super

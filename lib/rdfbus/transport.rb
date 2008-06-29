@@ -4,13 +4,13 @@ module RDFbus
     attr_reader :uri
 
     def self.open(uri, &block)
-      protocol = 'aws-sqs'
+      protocol = :aws
       require "rdfbus/transports/#{protocol}"
 
       klass = case protocol.to_sym
-        when :stomp     then RDFbus::Transports::Stomp
-        when :xmpp      then RDFbus::Transports::XMPP
-        when :"aws-sqs" then RDFbus::Transports::AmazonSQS
+        when :aws   then RDFbus::Transports::AWS
+        when :stomp then RDFbus::Transports::Stomp
+        when :xmpp  then RDFbus::Transports::XMPP
       end
 
       transport = klass.new(uri)
