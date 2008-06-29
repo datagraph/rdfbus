@@ -21,8 +21,8 @@ module RDFbus::Transports
           block.call(msg.body)
           msg.delete
         end
-        sleep interval
         break if !timeout.nil? && (Time.now - start) >= timeout
+        sleep interval
       end
     end
   end
