@@ -1,8 +1,11 @@
 module RDFbus
   class Transaction
-    attr_reader :uuid
-    attr_reader :inserts
-    attr_reader :deletes
+    include RDF
+    RDF = Namespace[:rdf]
+    CS  = Namespace.new('http://purl.org/vocab/changeset/schema#')
+
+    attr_reader   :uuid, :inserts, :deletes
+    attr_accessor :date, :creator, :description
 
     def self.parse(io)
       self.new # TODO
@@ -14,19 +17,64 @@ module RDFbus
     end
 
     def uri
-      "urn:uuid:#{uuid}"
+      @uri ||= "urn:uuid:#{uuid}"
     end
 
     def insert(*stmts)
       @inserts += stmts
+      self
     end
 
     def delete(*stmts)
       @deletes += stmts
+      self
+    end
+
+    def inserts_reified
+      stmts = []
+      inserts.each do |s, p, o|
+        bnode = Node.new
+        stmts << [to_uri, CS[:addition], bnode]
+        stmts << [bnode, RDF[:type], RDF[:Statement]]
+        stmts << [bnode, RDF[:subject], s]
+        stmts << [bnode, RDF[:predicate], p]
+        stmts << [bnode, RDF[:object], o]
+      end
+      stmts
+    end
+
+    def deletes_reified
+      stmts = []
+      deletes.each do |s, p, o|
+        bnode = Node.new
+        stmts << [to_uri, CS[:removal], bnode]
+        stmts << [bnode, RDF[:type], RDF[:Statement]]
+        stmts << [bnode, RDF[:subject], s]
+        stmts << [bnode, RDF[:predicate], p]
+        stmts << [bnode, RDF[:object], o]
+      end
+      stmts
+    end
+
+    def to_uri
+      @uriref ||= URIRef.new(uri)
     end
 
     def to_a
-      # TODO
+      stmts = []
+      stmts << [to_uri, RDF[:type], CS[:ChangeSet]]
+      stmts << [to_uri, CS[:createdDate], self.date ||= Time.now.to_i]
+      stmts << [to_uri, CS[:creatorName], self.creator] if self.creator
+      stmts << [to_uri, CS[:changeReason], self.description] if self.description
+      stmts += deletes_reified
+      stmts += inserts_reified
+      stmts
+    end
+
+    def to_s(options = {})
+      Writer.for(options[:format] || :ntriples).buffer do |out|
+        to_a.each { |triple| out << triple }
+      end
     end
   end
 end
