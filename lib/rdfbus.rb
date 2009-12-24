@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'uuidtools'
 require 'rdf'
 require 'rdfbus/version'
 

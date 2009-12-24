@@ -29,6 +29,7 @@ Dependencies
 ------------
 
 * [RDF.rb](http://rdf.rubyforge.org/) (>= 0.0.4)
+* [UUIDTools](http://uuidtools.rubyforge.org/) (>= 2.1.1)
 * [AMQP](http://amqp.rubyforge.org/) (>= 0.6.5)
 
 Installation
