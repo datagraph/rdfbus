@@ -8,8 +8,8 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.name               = 'rdfbus'
   gem.homepage           = 'http://github.com/bendiken/rdfbus' # FIXME
   gem.license            = 'Public Domain' if gem.respond_to?(:license=)
-  gem.summary            = '...' # TODO
-  gem.description        = '...' # TODO
+  gem.summary            = 'Middleware for transmitting RDF publish/subscribe payloads over AMQP.'
+  gem.description        = 'RDFbus is middleware for transmitting RDF publish/subscribe payloads over AMQP.'
   gem.rubyforge_project  = 'rdfbus'
 
   gem.authors            = ['Arto Bendiken']
