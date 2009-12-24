@@ -1,9 +1,9 @@
-require 'digest/sha1'
 require 'right_aws'
 
-module RDFbus::Transports
-  class AWS < RDFbus::Transport
-
+module RDFbus class Transport
+  ##
+  # Amazon SQS/S3 transport for RDFbus.
+  class AWS < Transport
     def initialize(uri, options = {})
       super
 
@@ -11,7 +11,7 @@ module RDFbus::Transports
       @queue = @sqs.queue(Digest::SHA1.hexdigest(uri.to_s), true)
 
       @s3 = RightAws::S3.new(ENV['AMAZON_ACCESS_KEY_ID'], ENV['AMAZON_SECRET_ACCESS_KEY'])
-      @bucket = @s3.bucket('rdfbus')
+      @bucket = @s3.bucket('rdfbus') # FIXME
     end
 
     def publish(payload)
@@ -35,4 +35,4 @@ module RDFbus::Transports
       end
     end
   end
-end
+end end

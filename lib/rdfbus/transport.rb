@@ -1,19 +1,37 @@
 module RDFbus
+  ##
+  # An RDFbus transport protocol.
+  #
+  # @abstract
   class Transport
+    autoload :AMQP,  'rdfbus/transport/amqp'
+    autoload :AWS,   'rdfbus/transport/aws'
+    autoload :Stomp, 'rdfbus/transport/stomp'
+    autoload :XMPP,  'rdfbus/transport/xmpp'
 
+    # @return [URI]
     attr_reader :uri
 
-    def self.open(uri, &block)
-      protocol = :aws
-      require "rdfbus/transports/#{protocol}"
-
-      klass = case protocol.to_sym
-        when :aws   then RDFbus::Transports::AWS
-        when :stomp then RDFbus::Transports::Stomp
-        when :xmpp  then RDFbus::Transports::XMPP
+    ##
+    # @param  [Symbol] protocol
+    # @return [Transport]
+    def self.for(protocol)
+      case protocol.to_s.to_sym
+        when :amqp  then RDFbus::Transport::AMQP
+        when :aws   then RDFbus::Transport::AWS
+        when :stomp then RDFbus::Transport::Stomp
+        when :xmpp  then RDFbus::Transport::XMPP
       end
+    end
 
-      transport = klass.new(uri)
+    ##
+    # @param  [URI] uri
+    # @yield  [transport]
+    # @yieldparam [Transport]
+    # @return [Transport]
+    def self.open(uri, &block)
+      protocol  = :amqp # FIXME
+      transport = self.for(protocol).new(uri)
 
       if !block_given?
         transport
@@ -24,23 +42,37 @@ module RDFbus
       end
     end
 
+    ##
+    # @param  [URI] uri
     def initialize(uri, options = {})
-      @uri = uri
+      @uri = case uri
+        when RDF::URI then uri
+        else RDF::URI.new(uri.to_s)
+      end
       open
     end
 
-    def open() end # :nodoc:
-    def close() end # :nodoc:
+    ##
+    # @abstract
+    def open() end
 
+    ##
+    # @abstract
+    def close() end
+
+    ##
+    # @raise [NotImplementedError] unless implemented in subclass
+    # @abstract
     def publish(payload)
       raise NotImplementedError
     end
 
+    ##
+    # @raise [NotImplementedError] unless implemented in subclass
+    # @abstract
     def subscribe(&block)
       raise NotImplementedError
     end
 
   end
-
-  module Transports; end
 end
