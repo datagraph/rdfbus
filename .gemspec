@@ -33,7 +33,5 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.add_runtime_dependency     'rdf',       '>= 0.0.9'
   gem.add_runtime_dependency     'uuidtools', '>= 2.1.1'
   gem.add_runtime_dependency     'amqp',      '>= 0.6.5'
-  #gem.add_runtime_dependency    'stomp',     '>= 1.1.3'
-  #gem.add_runtime_dependency    'xmpp4r',    '>= 0.5'
   gem.post_install_message       = nil
 end
