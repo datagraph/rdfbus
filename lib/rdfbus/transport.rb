@@ -4,11 +4,7 @@ module RDFbus
   #
   # @abstract
   class Transport
-    autoload :AMQP,  'rdfbus/transport/amqp'
-    autoload :AWS,   'rdfbus/transport/aws'
-    autoload :Stomp, 'rdfbus/transport/stomp'
-    autoload :XMPP,  'rdfbus/transport/xmpp'
-
+    ##
     # @return [URI]
     attr_reader :uri
 
