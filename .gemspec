@@ -32,6 +32,6 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard' ,     '>= 0.5.3'
   gem.add_runtime_dependency     'rdf',       '>= 0.0.9'
   gem.add_runtime_dependency     'uuidtools', '>= 2.1.1'
-  gem.add_runtime_dependency     'amqp',      '>= 0.6.5'
+  gem.add_runtime_dependency     'amqp',      '>= 0.6.6'
   gem.post_install_message       = nil
 end
