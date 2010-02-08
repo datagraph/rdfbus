@@ -1,9 +1,9 @@
 require 'amqp'
 
-module RDFbus class Transport
+module RDFbus
   ##
   # AMQP transport for RDFbus.
   class AMQP < Transport
     # TODO
   end
-end end
+end
