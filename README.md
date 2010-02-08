@@ -3,6 +3,8 @@ RDFbus
 
 RDFbus is middleware for transmitting RDF publish/subscribe payloads over AMQP.
 
+* <http://github.com/bendiken/rdfbus>
+
 Examples
 --------
 
@@ -12,6 +14,25 @@ Documentation
 -------------
 
 * <http://rdfbus.rubyforge.org/>
+
+### RDF Transactions
+
+* {RDFbus::Transaction}
+
+Dependencies
+------------
+
+* [RDF.rb](http://gemcutter.org/gems/rdf) (>= 0.0.9)
+* [UUID](http://gemcutter.org/gems/uuid) (>= 2.1.1)
+* [AMQP](http://gemcutter.org/gems/amqp) (>= 0.6.6)
+
+Installation
+------------
+
+The recommended installation method is via RubyGems. To install the latest
+official release from Gemcutter, do:
+
+    % [sudo] gem install rdfbus
 
 Download
 --------
@@ -25,21 +46,6 @@ as follows:
 
     % wget http://github.com/bendiken/rdfbus/tarball/master
 
-Dependencies
-------------
-
-* [RDF.rb](http://rdf.rubyforge.org/) (>= 0.0.4)
-* [UUIDTools](http://uuidtools.rubyforge.org/) (>= 2.1.1)
-* [AMQP](http://amqp.rubyforge.org/) (>= 0.6.5)
-
-Installation
-------------
-
-The recommended installation method is via RubyGems. To install the latest
-official release from Gemcutter, do:
-
-    % [sudo] gem install rdfbus
-
 Resources
 ---------
 
@@ -48,6 +54,7 @@ Resources
 * <http://gemcutter.org/gems/rdfbus>
 * <http://rubyforge.org/projects/rdfbus/>
 * <http://raa.ruby-lang.org/project/rdfbus/>
+* <http://www.ohloh.net/p/rdfbus>
 
 Author
 ------
