@@ -17,7 +17,7 @@ module RDFbus
     # @return [Class]
     def self.for(protocol)
       case protocol.to_s.to_sym
-        when :amqp then RDFbus::AMQP
+        when :amqp then RDFbus::AMQP::Transport
       end
     end
 
