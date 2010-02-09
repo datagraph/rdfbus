@@ -23,6 +23,8 @@ Examples
 
 ### Obtaining the JSON representation of a transaction
 
+    # Requires http://rdf.rubyforge.org/json/
+
     tx.to_json   #=> {
                  #     graph:  null,
                  #     delete: {
@@ -42,6 +44,8 @@ Examples
                  #   }
 
 ### Executing a transaction against an RDF repository (1)
+
+    # Requires http://rdf.rubyforge.org/sesame/
 
     require 'rdf/sesame'
 
