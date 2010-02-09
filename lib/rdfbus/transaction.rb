@@ -26,16 +26,16 @@ module RDFbus
     attr_reader :graph
 
     ##
-    # RDF statements to insert when executed.
-    #
-    # @return [RDF::Enumerable]
-    attr_reader :inserts
-
-    ##
     # RDF statements to delete when executed.
     #
     # @return [RDF::Enumerable]
     attr_reader :deletes
+
+    ##
+    # RDF statements to insert when executed.
+    #
+    # @return [RDF::Enumerable]
+    attr_reader :inserts
 
     ##
     # Any additional options for this transaction.
@@ -117,6 +117,24 @@ module RDFbus
         :insert => inserts.to_rdf_json,
       })
       json.to_json
+    end
+
+    ##
+    # Returns a developer-friendly representation of this transaction.
+    #
+    # @return [String]
+    def inspect
+      sprintf("#<%s:%#0x(graph: %s, deletes: %d, inserts: %d)>", self.class.name, object_id,
+        graph ? graph.to_s : 'nil', deletes.count, inserts.count)
+    end
+
+    ##
+    # Outputs a developer-friendly representation of this transaction to
+    # `stderr`.
+    #
+    # @return [void]
+    def inspect!
+      warn(inspect)
     end
 
     ##
