@@ -10,6 +10,36 @@ Examples
 
     require 'rdfbus'
 
+### Creating a transaction for updating an RDF statement
+
+    s  = RDF::URI.new('http://rdfbus.rubyforge.org/')
+    p  = RDF::DC.title
+
+    tx = RDFbus::Transaction.new do
+      delete [s, p, 'RDFbus 0.0.0']
+      insert [s, p, 'RDFbus 0.0.1']
+    end
+
+### Obtaining the JSON representation of a transaction
+
+    tx.to_json   #=> {
+                 #     graph:  null,
+                 #     delete: {
+                 #       'http://rdfbus.rubyforge.org/': {
+                 #         'http://purl.org/dc/terms/title': [
+                 #           {'type': 'literal', 'value': 'RDFbus 0.0.0'}
+                 #         ]
+                 #       }
+                 #     },
+                 #     insert: {
+                 #       'http://rdfbus.rubyforge.org/': {
+                 #         'http://purl.org/dc/terms/title': [
+                 #           {'type': 'literal', 'value': 'RDFbus 0.0.1'}
+                 #         ]
+                 #       }
+                 #     }
+                 #   }
+
 Documentation
 -------------
 
