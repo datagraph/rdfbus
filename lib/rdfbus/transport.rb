@@ -93,5 +93,21 @@ module RDFbus
     def subscribe(options = {}, &block)
       raise NotImplementedError.new("#{self.class}#subscribe is not implemented yet")
     end
+
+    ##
+    # Returns a developer-friendly representation of this object.
+    #
+    # @return [String]
+    def inspect
+      sprintf("#<%s:%#0x(%s)>", self.class.name, object_id, url.to_s)
+    end
+
+    ##
+    # Outputs a developer-friendly representation of this object to `stderr`.
+    #
+    # @return [void]
+    def inspect!
+      warn(inspect)
+    end
   end
 end
