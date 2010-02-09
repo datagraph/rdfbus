@@ -8,6 +8,18 @@ module RDFbus
     include RDF::Mutable
 
     ##
+    # Executes a transaction against the given RDF repository.
+    #
+    # @param  [RDF::Repository]         repository
+    # @param  [Hash{Symbol => Object}]  options
+    # @yield  [transaction]
+    # @yieldparam [Transaction] transaction
+    # @return [void]
+    def self.execute(repository, options = {}, &block)
+      self.new(&block).execute(repository, options)
+    end
+
+    ##
     # RDF graph to modify when executed.
     #
     # @return [RDF::Resource]
@@ -68,6 +80,31 @@ module RDFbus
     end
 
     ##
+    # Executes this transaction against the given RDF repository.
+    #
+    # @param  [RDF::Repository]         repository
+    # @param  [Hash{Symbol => Object}]  options
+    # @return [void]
+    def execute(repository, options = {})
+      before_execute(repository, options) if respond_to?(:before_execute)
+
+      deletes.each_statement do |statement|
+        statement = statement.dup
+        statement.context = graph
+        repository.delete(statement)
+      end
+
+      inserts.each_statement do |statement|
+        statement = statement.dup
+        statement.context = graph
+        repository.insert(statement)
+      end
+
+      after_execute(repository, options) if respond_to?(:after_execute)
+      nil
+    end
+
+    ##
     # Returns the JSON representation of this transaction.
     #
     # @return [Hash]
@@ -76,8 +113,8 @@ module RDFbus
       json = options.dup.to_hash rescue {}
       json.merge!({
         :graph  => graph ? graph.to_uri.to_s : nil,
-        :insert => inserts.to_rdf_json,
         :delete => deletes.to_rdf_json,
+        :insert => inserts.to_rdf_json,
       })
       json.to_json
     end
