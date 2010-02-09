@@ -1,7 +1,8 @@
 RDFbus
 ======
 
-RDFbus is middleware for transmitting RDF publish/subscribe payloads over AMQP.
+RDFbus is middleware for constructing RDF transactions and transmitting RDF
+publish/subscribe payloads over transports such as AMQP, XMPP or Stomp.
 
 * <http://github.com/bendiken/rdfbus>
 
@@ -12,12 +13,11 @@ Examples
 
 ### Creating a transaction for updating an RDF statement
 
-    s  = RDF::URI.new('http://rdfbus.rubyforge.org/')
-    p  = RDF::DC.title
+    resource = RDF::URI.new("http://rdfbus.rubyforge.org/")
 
     tx = RDFbus::Transaction.new do
-      delete [s, p, 'RDFbus 0.0.0']
-      insert [s, p, 'RDFbus 0.0.1']
+      delete [resource, RDF::DC.title, "RDFbus 0.0.0"]
+      insert [resource, RDF::DC.title, "RDFbus 0.0.1"]
     end
 
 ### Obtaining the JSON representation of a transaction
@@ -39,6 +39,23 @@ Examples
                  #       }
                  #     }
                  #   }
+
+### Executing a transaction against an RDF repository (1)
+
+    require 'rdf/sesame'
+
+    endpoint   = "http://localhost:8080/openrdf-sesame"
+    server     = RDF::Sesame::Server.new(endpoint)
+    repository = server.repository("test")
+
+    tx = RDFbus::Transaction.new { ... }
+    tx.execute(repository)
+
+### Executing a transaction against an RDF repository (2)
+
+    RDFbus::Transaction.execute(repository) do |tx|
+      ...
+    end
 
 Documentation
 -------------
@@ -75,6 +92,11 @@ Alternatively, you can download the latest development version as a tarball
 as follows:
 
     % wget http://github.com/bendiken/rdfbus/tarball/master
+
+Mailing List
+------------
+
+* <http://groups.google.com/group/rdfbus>
 
 Resources
 ---------
