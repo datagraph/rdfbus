@@ -1,4 +1,4 @@
---title "RDFbus - RDF Transactions over AMQP"
+--title "RDFbus - Linked Data Transactions over AMQP"
 --output-dir doc/yard
 --protected
 --no-private

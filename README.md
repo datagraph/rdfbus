@@ -1,8 +1,9 @@
-RDFbus
-======
+RDFbus: Linked Data Transactions over AMQP
+==========================================
 
-RDFbus is middleware for constructing RDF transactions and transmitting RDF
-publish/subscribe payloads over transports such as AMQP, XMPP or Stomp.
+RDFbus is middleware for constructing RDF changesets/transactions and
+transmitting RDF publish/subscribe payloads over transports such as AMQP,
+XMPP or Stomp.
 
 * <http://github.com/bendiken/rdfbus>
 
