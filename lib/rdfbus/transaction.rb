@@ -54,8 +54,8 @@ module RDFbus
     # @yieldparam [Transaction] transaction
     def initialize(options = {}, &block)
       @graph   = options.delete(:graph)
-      @inserts = options.delete(:insert) || RDF::Repository.new # FIXME
-      @deletes = options.delete(:delete) || RDF::Repository.new # FIXME
+      @inserts = options.delete(:insert) || RDF::Graph.new
+      @deletes = options.delete(:delete) || RDF::Graph.new
       @options = options
 
       if block_given?
