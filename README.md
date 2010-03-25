@@ -1,7 +1,7 @@
 RDFbus: Linked Data Transactions over AMQP
 ==========================================
 
-RDFbus is middleware for constructing RDF changesets/transactions and
+RDFbus is middleware for constructing [RDF][] changesets/transactions and
 transmitting RDF publish/subscribe payloads over transports such as AMQP,
 XMPP or Stomp.
 
@@ -71,10 +71,14 @@ Documentation
 
 * {RDFbus::Transaction}
 
+### RDF Transports
+
+* {RDFbus::Transport}
+
 Dependencies
 ------------
 
-* [RDF.rb](http://gemcutter.org/gems/rdf) (>= 0.1.0)
+* [RDF.rb](http://gemcutter.org/gems/rdf) (>= 0.1.1)
 * [UUID](http://gemcutter.org/gems/uuid) (>= 2.2.0)
 * [AMQP](http://gemcutter.org/gems/amqp) (>= 0.6.7)
 
@@ -82,7 +86,7 @@ Installation
 ------------
 
 The recommended installation method is via RubyGems. To install the latest
-official release from Gemcutter, do:
+official release from [RubyGems](http://rubygems.org/), do:
 
     % [sudo] gem install rdfbus
 
@@ -108,7 +112,7 @@ Resources
 
 * <http://rdfbus.rubyforge.org/>
 * <http://github.com/datagraph/rdfbus>
-* <http://gemcutter.org/gems/rdfbus>
+* <http://rubygems.org/gems/rdfbus>
 * <http://rubyforge.org/projects/rdfbus/>
 * <http://raa.ruby-lang.org/project/rdfbus/>
 * <http://www.ohloh.net/p/rdfbus>
@@ -123,3 +127,5 @@ License
 
 RDFbus is free and unencumbered public domain software. For more
 information, see <http://unlicense.org/> or the accompanying UNLICENSE file.
+
+[RDF]: http://www.w3.org/RDF/
