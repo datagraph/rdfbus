@@ -5,7 +5,7 @@ RDFbus is middleware for constructing RDF changesets/transactions and
 transmitting RDF publish/subscribe payloads over transports such as AMQP,
 XMPP or Stomp.
 
-* <http://github.com/bendiken/rdfbus>
+* <http://github.com/datagraph/rdfbus>
 
 Examples
 --------
@@ -91,12 +91,12 @@ Download
 
 To get a local working copy of the development repository, do:
 
-    % git clone git://github.com/bendiken/rdfbus.git
+    % git clone git://github.com/datagraph/rdfbus.git
 
 Alternatively, you can download the latest development version as a tarball
 as follows:
 
-    % wget http://github.com/bendiken/rdfbus/tarball/master
+    % wget http://github.com/datagraph/rdfbus/tarball/master
 
 Mailing List
 ------------
@@ -107,7 +107,7 @@ Resources
 ---------
 
 * <http://rdfbus.rubyforge.org/>
-* <http://github.com/bendiken/rdfbus>
+* <http://github.com/datagraph/rdfbus>
 * <http://gemcutter.org/gems/rdfbus>
 * <http://rubyforge.org/projects/rdfbus/>
 * <http://raa.ruby-lang.org/project/rdfbus/>
