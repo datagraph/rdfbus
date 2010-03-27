@@ -75,6 +75,13 @@ Documentation
 
 * {RDFbus::Transport}
 
+Related Work
+------------
+
+* <http://www.w3.org/DesignIssues/Diff>
+* <http://n2.talis.com/wiki/Changesets>
+* <http://webr3.org/diff/>
+
 Dependencies
 ------------
 
