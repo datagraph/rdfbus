@@ -12,8 +12,8 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.description        = 'RDFbus is middleware for transmitting RDF publish/subscribe payloads over AMQP.'
   gem.rubyforge_project  = 'rdfbus'
 
-  gem.authors            = ['Arto Bendiken']
-  gem.email              = 'arto.bendiken@gmail.com'
+  gem.authors            = ['Datagraph']
+  gem.email              = 'rdfbus@googlegroups.com'
 
   gem.platform           = Gem::Platform::RUBY
   gem.files              = %w(AUTHORS README UNLICENSE VERSION bin/rdfbus) + Dir.glob('lib/**/*.rb')
@@ -27,11 +27,11 @@ GEMSPEC = Gem::Specification.new do |gem|
 
   gem.required_ruby_version      = '>= 1.8.2'
   gem.requirements               = []
-  gem.add_development_dependency 'rdf-spec',  '>= 0.1.0'
-  gem.add_development_dependency 'rspec',     '>= 1.3.0'
-  gem.add_development_dependency 'yard' ,     '>= 0.5.3'
-  gem.add_runtime_dependency     'rdf',       '>= 0.1.0'
-  gem.add_runtime_dependency     'uuid',      '>= 2.2.0'
-  gem.add_runtime_dependency     'amqp',      '>= 0.6.7'
+  gem.add_development_dependency 'rdf-spec', '>= 0.1.0'
+  gem.add_development_dependency 'rspec',    '>= 1.3.0'
+  gem.add_development_dependency 'yard' ,    '>= 0.5.3'
+  gem.add_runtime_dependency     'rdf',      '>= 0.1.2'
+  gem.add_runtime_dependency     'uuid',     '>= 2.2.0'
+  gem.add_runtime_dependency     'amqp',     '>= 0.6.7'
   gem.post_install_message       = nil
 end
