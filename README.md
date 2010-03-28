@@ -124,8 +124,10 @@ Resources
 * <http://raa.ruby-lang.org/project/rdfbus/>
 * <http://www.ohloh.net/p/rdfbus>
 
-Author
-------
+Authors
+-------
+
+RDFbus is a [Datagraph][] technology.
 
 * [Arto Bendiken](mailto:arto.bendiken@gmail.com) - <http://ar.to/>
 
@@ -135,4 +137,5 @@ License
 RDFbus is free and unencumbered public domain software. For more
 information, see <http://unlicense.org/> or the accompanying UNLICENSE file.
 
-[RDF]: http://www.w3.org/RDF/
+[Datagraph]:  http://datagraph.org/
+[RDF]:        http://www.w3.org/RDF/
